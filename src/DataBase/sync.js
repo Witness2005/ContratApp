@@ -1,5 +1,7 @@
 const connection = require('./connection');
 
+const user = require('../Models/user');
+
 async function sync(){
     await connection.sync({force: false})
         .then(() => { 
