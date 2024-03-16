@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const connection = require('../DataBase/connection');
 
-class User extends Model {}
+class Worker extends Model {}
 
-User.init({
-    userId: {
+Worker.init({
+    workerId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -22,14 +22,16 @@ User.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    studies: {
+        type: DataTypes.JSONB, // You can adjust the data type as per your requirement
+        allowNull: true
     }
 }, {
     sequelize: connection,
-    modelName: 'user',
+    modelName: 'worker',
     paranoid: true,
     deleteAt: 'destroyTime'
 });
 
-
-
-module.exports = { User };
+module.exports = { Worker };

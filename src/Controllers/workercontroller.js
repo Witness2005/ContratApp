@@ -1,55 +1,55 @@
 const express = require('express');
-const { User } = require('../Models/user');
+const { Worker } = require('../Models/worker');
 
-
-async function createUser(req, res) {
+async function createWorker(req, res) {
     try {
-        const newUser = await User.create({
+        const newWorker = await Worker.create({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-          
+            studies: req.body.studies 
         });
-        return res.status(200).json({ data: newUser });
+        return res.status(200).json({ data: newWorker });
     } catch (error) {
         console.error(error);
         return res.status(400).json({ error: error.message });
     }
 }
 
-async function listUsers(req, res) {
+async function listWorkers(req, res) {
     try {
-        const users = await User.findAll({
-            attributes: ['userId', 'username', 'email'],
+        const workers = await Worker.findAll({
+            attributes: ['workerId', 'username', 'email', 'studies'], 
             order: ['username']
         });
-        return res.status(200).json({ data: users });
+        return res.status(200).json({ data: workers });
     } catch (error) {
         console.error(error);
         return res.status(400).json({ error: error.message });
     }
 }
 
-async function updateUser(req, res) {
+async function updateWorker(req, res) {
     try {
-        const updatedUser = await User.update({
+        const updatedWorker = await Worker.update({
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            studies: req.body.studies 
         }, {
-            where: { userId: req.params.userId }
+            where: { workerId: req.params.workerId }
         });
-        return res.status(200).json({ data: updatedUser });
+        return res.status(200).json({ data: updatedWorker });
     } catch (error) {
         console.error(error);
         return res.status(400).json({ error: error.message });
     }
 }
 
-async function disableUser(req, res) {
+async function disableWorker(req, res) {
     try {
-        const result = await User.destroy({
-            where: { userId: req.params.userId }
+        const result = await Worker.destroy({
+            where: { workerId: req.params.workerId }
         });
         return res.status(200).json({ data: result });
     } catch (error) {
@@ -58,10 +58,10 @@ async function disableUser(req, res) {
     }
 }
 
-async function enableUser(req, res) {
+async function enableWorker(req, res) {
     try {
-        const result = await User.restore({
-            where: { userId: req.params.userId }
+        const result = await Worker.restore({
+            where: { workerId: req.params.workerId }
         });
         return res.status(200).json({ data: result });
     } catch (error) {
@@ -71,10 +71,9 @@ async function enableUser(req, res) {
 }
 
 module.exports = {
-    createUser,
-    listUsers,
-    updateUser,
-    disableUser,
-    enableUser,
-  
+    createWorker,
+    listWorkers,
+    updateWorker,
+    disableWorker,
+    enableWorker
 };
