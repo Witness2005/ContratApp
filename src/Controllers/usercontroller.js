@@ -8,6 +8,7 @@ async function createUser(req, res) {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
+            phonenumber: req.body.phonenumber,
           
         });
         return res.status(200).json({ data: newUser });
@@ -76,5 +77,4 @@ module.exports = {
     updateUser,
     disableUser,
     enableUser,
-  
 };

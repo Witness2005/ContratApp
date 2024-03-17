@@ -22,6 +22,10 @@ User.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    phonenumber: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     sequelize: connection,
