@@ -3,11 +3,16 @@ const { Worker } = require('../Models/worker');
 
 async function createWorker(req, res) {
     try {
+        const rating = parseFloat(req.body.rating); 
+        if (rating > 5) {
+            throw new Error("Rating cannot be above 5.");
+        }
         const newWorker = await Worker.create({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            studies: req.body.studies 
+            studies: req.body.studies,
+            rating: req.body.rating
         });
         return res.status(200).json({ data: newWorker });
     } catch (error) {
@@ -19,7 +24,7 @@ async function createWorker(req, res) {
 async function listWorkers(req, res) {
     try {
         const workers = await Worker.findAll({
-            attributes: ['workerId', 'username', 'email', 'studies'], 
+            attributes: ['workerId', 'username', 'email', 'studies','rating'], 
             order: ['username']
         });
         return res.status(200).json({ data: workers });
@@ -35,7 +40,8 @@ async function updateWorker(req, res) {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            studies: req.body.studies 
+            studies: req.body.studies,
+            rating: req.body.rating
         }, {
             where: { workerId: req.params.workerId }
         });

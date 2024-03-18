@@ -1,25 +1,25 @@
 const express = require('express');
 const { Gig } = require('../Models/gig');
-const { Category } = require('../Models/category'); // Import the Category model
+const { Category } = require('../Models/category'); 
 const { Worker } = require('../Models/worker');
 const { User } = require('../Models/user');
 
 
 async function createGig(req, res) {
     try {
-        // Check if workerId exists
+        
         const existingWorker = await Worker.findOne({ where: { workerId: req.body.workerId } });
         if (!existingWorker) {
             throw new Error('Worker with provided ID does not exist');
         }
 
-        // Check if userId exists
+       
         const existingUser = await User.findOne({ where: { userId: req.body.userId } });
         if (!existingUser) {
             throw new Error('User with provided ID does not exist');
         }
 
-        // Check if categoryId exists
+        
         const existingCategory = await Category.findOne({ where: { categoryId: req.body.categoryId } });
         if (!existingCategory) {
             throw new Error('Category with provided ID does not exist');

@@ -24,8 +24,12 @@ Worker.init({
         allowNull: false
     },
     studies: {
-        type: DataTypes.JSONB, // You can adjust the data type as per your requirement
+        type: DataTypes.JSONB, 
         allowNull: true
+    },
+    rating: {
+        type: DataTypes.FLOAT, 
+        allowNull: true 
     }
 }, {
     sequelize: connection,

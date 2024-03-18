@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const connection = require('../DataBase/connection');
-const { Category } = require('./category'); // Import the Category model
+const { Category } = require('./category'); 
 
 class Gig extends Model {}
 
@@ -35,7 +35,7 @@ Gig.init({
         allowNull: false
     },
     categoryId: {
-        type: DataTypes.INTEGER, // Assuming category is stored as an ID referencing the Category model
+        type: DataTypes.INTEGER, 
         allowNull: false,
         references: {
             model: Category,
