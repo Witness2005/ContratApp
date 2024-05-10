@@ -126,11 +126,24 @@ const User = () => {
     console.log('Editar restaurante con ID:', restaurantId);
   }
 
-  function handleDelete(restaurantId) {
-    
-    console.log('Eliminar restaurante con ID:', restaurantId);
-  }
-
+  const handleDisable = async (userId) => {
+    try {
+      const url = `http://localhost:1337/api/disableUser/${userId}`;
+      await Axios.put(url);
+  
+      // Luego de deshabilitar exitosamente el usuario en el backend, puedes actualizar el estado de userData para reflejar los cambios en la interfaz de usuario
+      setUserData(prevData => prevData.map(user => {
+        if (user.userId === userId) {
+          return { ...user, disabled: true }; // Suponiendo que tienes un campo "disabled" en tu objeto de usuario
+        }
+        return user;
+      }));
+    } catch (error) {
+      console.log('Error al deshabilitar el usuario con ID:', userId);
+      console.error(error);
+    }
+  };
+  
 
   return (
     <div>
@@ -154,8 +167,8 @@ const User = () => {
                 <CTableDataCell>{user.email}</CTableDataCell>
                 <CTableDataCell>{user.phonenumber}</CTableDataCell>
                 <CTableDataCell>
-                <CButton onClick={() => handleEdit(restaurant.id)} color="primary" size="sm">Edit</CButton>{' '}
-                  <CButton onClick={() => handleDelete(restaurant.id)} color="danger" size="sm">Delete</CButton>
+                <CButton onClick={() => handleEdit(user.id)} color="primary" size="sm">Edit</CButton>{' '}
+                <CButton onClick={() => handleDisable(user.userId)} color="danger" size="sm">Delete</CButton>
                 </CTableDataCell>
               </CTableRow>
             ))}
