@@ -109,7 +109,7 @@ const User = () => {
       const response = await Axios({
         url: 'http://localhost:1337/api/listusers'
       });
-      console.log(response.data); // Log the response data
+      console.log(response.data); 
 
       const lstUsers = Object.keys(response.data).map(i=> response.data[i]);
       setUserData(lstUsers.flat());
@@ -122,23 +122,28 @@ const User = () => {
   }
 
   function handleEdit(restaurantId) {
-    // Lógica para editar el restaurante
+
     console.log('Editar restaurante con ID:', restaurantId);
   }
+
 
   const handleDisable = async (userId) => {
     try {
       const url = `http://localhost:1337/api/disableUser/${userId}`;
       await Axios.put(url);
   
-      // Luego de deshabilitar exitosamente el usuario en el backend, puedes actualizar el estado de userData para reflejar los cambios en la interfaz de usuario
+      
       setUserData(prevData => prevData.map(user => {
         if (user.userId === userId) {
-          return { ...user, disabled: true }; // Suponiendo que tienes un campo "disabled" en tu objeto de usuario
+          return { ...user, disabled: true }; 
         }
         return user;
-      }));
-    } catch (error) {
+        
+      })); 
+      window.location.reload();
+
+    }
+     catch (error) {
       console.log('Error al deshabilitar el usuario con ID:', userId);
       console.error(error);
     }
