@@ -117,10 +117,25 @@ const User = () => {
 
     getUsers();
   },[]);
+  function handleCreateUser(event){
+    navigate('/contratapp/userform');
+  }
+
+  function handleEdit(restaurantId) {
+    // Lógica para editar el restaurante
+    console.log('Editar restaurante con ID:', restaurantId);
+  }
+
+  function handleDelete(restaurantId) {
+    
+    console.log('Eliminar restaurante con ID:', restaurantId);
+  }
 
 
   return (
     <div>
+            <CButton onClick={handleCreateUser} > New Restaurant </CButton>
+
       <CTable>
         <CTableHead>
           <CTableRow>
@@ -128,6 +143,7 @@ const User = () => {
             <CTableHeaderCell>Name</CTableHeaderCell>
             <CTableHeaderCell>Email</CTableHeaderCell>
             <CTableHeaderCell>Phone Number</CTableHeaderCell>
+            <CTableHeaderCell>Options</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -137,7 +153,10 @@ const User = () => {
                 <CTableDataCell>{user.username}</CTableDataCell>
                 <CTableDataCell>{user.email}</CTableDataCell>
                 <CTableDataCell>{user.phonenumber}</CTableDataCell>
-                
+                <CTableDataCell>
+                <CButton onClick={() => handleEdit(restaurant.id)} color="primary" size="sm">Edit</CButton>{' '}
+                  <CButton onClick={() => handleDelete(restaurant.id)} color="danger" size="sm">Delete</CButton>
+                </CTableDataCell>
               </CTableRow>
             ))}
         </CTableBody>
