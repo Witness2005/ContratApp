@@ -1,8 +1,9 @@
 require('./DataBase/sync.js');
-
+const cors = require('cors')
 const connection = require('./DataBase/connection.js');
 const express = require('express');
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 1337;
 //routers
 const userrouter = require('./Routers/userrouter.js');

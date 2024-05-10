@@ -21,7 +21,7 @@ async function createUser(req, res) {
 async function listUsers(req, res) {
     try {
         const users = await User.findAll({
-            attributes: ['userId', 'username', 'email'],
+            attributes: ['userId', 'username', 'email','phonenumber'],
             order: ['username']
         });
         return res.status(200).json({ data: users });

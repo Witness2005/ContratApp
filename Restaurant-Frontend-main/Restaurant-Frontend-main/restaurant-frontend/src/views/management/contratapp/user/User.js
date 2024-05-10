@@ -1,4 +1,4 @@
-
+/*
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
@@ -16,16 +16,19 @@ import { DocsExample } from 'src/components'
 import { Title } from 'chart.js'
 
 const User = () => {
-  const [restaurantData, setRestaurantData] = useState([]);
+  const [userData, setUserData] = useState([]);
   function handleCreateUser (event){
   useEffect(()=>{
     const getUsers = async() =>{
       const response = await Axios ({
-        url: ''
+        url: 'http://localhost:1337/api/listusers'
       });
+      const lstUsers= Object.keys(response.data).map(i=> response.data[i])
+      setUserData(lstUsers.flat());
 
 
     }
+    getUsers();
 
 
   },[]);
@@ -64,6 +67,80 @@ const User = () => {
           </CTableRow>
 
         </CTableHead>
+        <CTableBody>
+          {userData.map((user, index) => (
+            <CTableRow key={index}>
+              {columns.map((columns, columnIndex) => (
+                <CTableDataCell key={columnIndex}> {user[columns.dataIndex]}</CTableDataCell>
+              ))}
+            </CTableRow>
+
+
+          ))}
+        </CTableBody>
+      </CTable>
+    </div>
+  )
+}
+
+export default User
+*/
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
+import {
+  CButton,
+  CTable,
+  CTableHead,
+  CTableBody,
+  CTableRow,
+  CTableHeaderCell,
+  CTableDataCell
+} from '@coreui/react';
+
+
+const User = () => {
+
+  const [userData, setUserData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    const getUsers = async() =>{
+      const response = await Axios({
+        url: 'http://localhost:1337/api/listusers'
+      });
+      console.log(response.data); // Log the response data
+
+      const lstUsers = Object.keys(response.data).map(i=> response.data[i]);
+      setUserData(lstUsers.flat());
+    }
+
+    getUsers();
+  },[]);
+
+
+  return (
+    <div>
+      <CTable>
+        <CTableHead>
+          <CTableRow>
+            <CTableHeaderCell>User id</CTableHeaderCell>
+            <CTableHeaderCell>Name</CTableHeaderCell>
+            <CTableHeaderCell>Email</CTableHeaderCell>
+            <CTableHeaderCell>Phone Number</CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody>
+            {userData.map((user, index) => (
+              <CTableRow key={index}>
+                <CTableDataCell>{user.userId}</CTableDataCell>
+                <CTableDataCell>{user.username}</CTableDataCell>
+                <CTableDataCell>{user.email}</CTableDataCell>
+                <CTableDataCell>{user.phonenumber}</CTableDataCell>
+                
+              </CTableRow>
+            ))}
+        </CTableBody>
       </CTable>
     </div>
   )
