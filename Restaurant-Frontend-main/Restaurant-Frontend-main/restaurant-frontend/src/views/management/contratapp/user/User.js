@@ -121,9 +121,11 @@ const User = () => {
     navigate('/contratapp/userform');
   }
 
-  function handleEdit(restaurantId) {
+  function handleEdit(userId) {
+    navigate(`/contratapp/userupdateform/${userId}`);
 
-    console.log('Editar restaurante con ID:', restaurantId);
+
+    console.log('Editar restaurante con ID:', userId);
   }
 
 
@@ -152,7 +154,7 @@ const User = () => {
 
   return (
     <div>
-            <CButton onClick={handleCreateUser} > New Restaurant </CButton>
+            <CButton onClick={handleCreateUser} > New User </CButton>
 
       <CTable>
         <CTableHead>
@@ -172,7 +174,7 @@ const User = () => {
                 <CTableDataCell>{user.email}</CTableDataCell>
                 <CTableDataCell>{user.phonenumber}</CTableDataCell>
                 <CTableDataCell>
-                <CButton onClick={() => handleEdit(user.id)} color="primary" size="sm">Edit</CButton>{' '}
+                <CButton onClick={() => handleEdit(user.userId)} color="primary" size="sm">Edit</CButton>{' '}
                 <CButton onClick={() => handleDisable(user.userId)} color="danger" size="sm">Delete</CButton>
                 </CTableDataCell>
               </CTableRow>

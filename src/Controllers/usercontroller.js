@@ -46,6 +46,32 @@ async function updateUser(req, res) {
         return res.status(400).json({ error: error.message });
     }
 }
+async function getUser(req, res){
+    try{
+        await User.findOne({
+            where: {userId : req.params.userId},
+            attributes: [
+                'userId',
+                'username',
+                'email',
+                'password',
+                'phonenumber'
+            ],
+            //Falta traer el departmentId
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 
 async function disableUser(req, res) {
     try {
@@ -77,4 +103,5 @@ module.exports = {
     updateUser,
     disableUser,
     enableUser,
+    getUser
 };
