@@ -32,7 +32,13 @@ const _nav = [
       name: 'User',
       to:'/contratapp/user',
       icon: <CIcon icon={cilUser} customClassName="nav-icon" />
-      }
+      },
+      {
+        component: CNavItem,
+        name: 'Worker',
+        to:'/contratapp/worker',
+        icon: <CIcon icon={cilUser} customClassName="nav-icon" />
+        }
     ]
     
     
