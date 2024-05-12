@@ -5,6 +5,7 @@ const router = express.Router();
 router.post('/createWorker', workerController.createWorker);
 
 router.get('/listWorkers', workerController.listWorkers);
+router.get('/getWorker/:workerId', workerController.getWorker);
 
 router.put('/updateWorker/:workerId', workerController.updateWorker);
 router.put('/disableWorker/:workerId', workerController.disableWorker);

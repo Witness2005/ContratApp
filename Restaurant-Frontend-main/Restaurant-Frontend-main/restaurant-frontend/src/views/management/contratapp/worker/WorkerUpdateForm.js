@@ -6,10 +6,9 @@ import Axios from 'axios';
 const WorkerUpdateForm = () => {
     const { workerId } = useParams(); 
     const [workerData, setWorkerData] = useState({
-        workername: '',
+        workername: '', 
         email: '',
         password: '',
-        phonenumber: ''
     });
     const navigate = useNavigate();
 
@@ -36,7 +35,7 @@ const WorkerUpdateForm = () => {
     };
 
     const handleReturn = () => {
-        
+        navigate('/contratapp/worker');
     };
 
     const handleSubmit = async (event) => {
@@ -44,7 +43,7 @@ const WorkerUpdateForm = () => {
         try {
             const response = await Axios.put(`http://localhost:1337/api/updateWorker/${workerId}`, workerData);
             console.log(response.data);
-            alert(`"${workerData.workername}" has been saved successfully!`);
+            alert(`"${workerData.username}" has been saved successfully!`);
             navigate('/contratapp/worker');
         } catch (error) {
             console.error(error);

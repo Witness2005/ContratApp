@@ -34,6 +34,34 @@ async function listWorkers(req, res) {
     }
 }
 
+async function getWorker(req, res){
+    try{
+        await Worker.findOne({
+            where: {workerId : req.params.workerId},
+            attributes: [
+                'workerId',
+                'username',
+                'email',
+                'password',
+                'studies',
+                'rating'
+            ],
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
+
 async function updateWorker(req, res) {
     try {
         const updatedWorker = await Worker.update({
@@ -81,5 +109,6 @@ module.exports = {
     listWorkers,
     updateWorker,
     disableWorker,
-    enableWorker
+    enableWorker,
+    getWorker
 };

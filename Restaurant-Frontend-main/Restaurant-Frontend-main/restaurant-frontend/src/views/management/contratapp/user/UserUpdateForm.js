@@ -36,7 +36,7 @@ const UserUpdateForm = () => {
     };
 
     const handleReturn = () => {
-        
+        navigate('/contratapp/user');
     };
 
     const handleSubmit = async (event) => {
