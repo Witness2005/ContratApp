@@ -87,5 +87,6 @@ module.exports={
     listAppUserRoles,
     createAppUser,
     login,
-    listAppUsers
+    listAppUsers,
+    
 }

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const jwtSecret = 'qwe987gfd';
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -7,14 +8,14 @@ const verifyToken = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1];
-    console.log('Token:', token); // Agrega esta línea para depuración
+    console.log('Token:', token); 
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, jwtSecret, (err, decoded) => {
         if (err) {
             return res.status(500).json({ error: 'Failed to authenticate token' });
         }
-
-        req.userId = decoded.appUserId;  // Usar la propiedad correcta del token
+    
+        req.userId = decoded.appUserId;
         next();
     });
 };
