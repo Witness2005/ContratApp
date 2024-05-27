@@ -7,6 +7,12 @@ const jwt = require('jsonwebtoken')
 //THIS IS ONLY FOR JWT EXERCISE PRACTICE - THIS IS NOT RECOMMENDED FOR ANY DEVELOPMENT
 const jwtPassword = 'qwe987gfd'
 
+const jwt = require('jsonwebtoken')
+
+//ESTO ES SOLO PARA LA PRÁCTICA DEL EJERCICIO DEL JWT - ESTO NO ES RECOMENDADO PARA NINGUN DESARROLLO
+//THIS IS ONLY FOR JWT EXERCISE PRACTICE - THIS IS NOT RECOMMENDED FOR ANY DEVELOPMENT
+const jwtPassword = 'qwe987gfd'
+
 async function listAppUserRoles(req, res){
     try {
         res.json(await appuser.appUserRoles().sort())
