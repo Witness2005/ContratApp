@@ -19,11 +19,11 @@ appuser.init({
         allowNull: false
     },
     appUserIdentificationType: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     appUserName: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }, 
     appUserPassword: {

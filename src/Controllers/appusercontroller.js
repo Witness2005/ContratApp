@@ -62,9 +62,24 @@ async function login (req, res){
         console.log(e)
     }
 }
+async function listAppUsers(req, res) {
+    try {
+        const users = await appuser.findAll();
+
+        return res.status(200).json({
+            data: users
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            error: 'Internal Server Error'
+        });
+    }
+}
 
 module.exports={
     listAppUserRoles,
     createAppUser,
-    login
+    login,
+    listAppUsers
 }

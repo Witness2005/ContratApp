@@ -4,5 +4,6 @@ const router = express.Router()
 
 router.post('/createappuser', appusercontroller.createAppUser)
 router.get('/listappuserroles', appusercontroller.listAppUserRoles)
+router.get('/listappusers', appusercontroller.listAppUsers)
 
 module.exports = router;
