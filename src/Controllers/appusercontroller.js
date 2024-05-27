@@ -38,7 +38,33 @@ async function createAppUser(req, res){
     }
 } 
 
+async function login (req, res){
+    try{
+        const userData = await user.findOne({ where: { userIdentification: req.body.userIdentification}})
+
+        if(!userData)
+            return res.status(401).json({message: "User not found"})
+
+        const validPassword = await bcrypt.compare(req.body.userPassword, userData.userPassword)
+
+        if(!validPassword)
+            return res.status(401).json({message: "Invalid password"})
+
+        const token = jwt.sign(
+            { userId: userData.userId, userRole: userData.userRole },
+            jwtPassword,
+            { expiresIn: '1h'}
+        )
+
+        return res.status(200).json({ token })
+    }
+    catch (e){
+        console.log(e)
+    }
+}
+
 module.exports={
     listAppUserRoles,
-    createAppUser
+    createAppUser,
+    login
 }
