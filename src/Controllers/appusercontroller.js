@@ -46,18 +46,18 @@ async function createAppUser(req, res){
 
 async function login (req, res){
     try{
-        const userData = await user.findOne({ where: { userIdentification: req.body.userIdentification}})
+        const appUserData = await appuser.findOne({ where: { appUserIdentification: req.body.appUserIdentification}})
 
-        if(!userData)
+        if(!appUserData)
             return res.status(401).json({message: "User not found"})
 
-        const validPassword = await bcrypt.compare(req.body.userPassword, userData.userPassword)
+        const validPassword = await bcrypt.compare(req.body.appUserPassword, appUserData.appUserPassword)
 
         if(!validPassword)
             return res.status(401).json({message: "Invalid password"})
 
         const token = jwt.sign(
-            { userId: userData.userId, userRole: userData.userRole },
+            { appUserId: appUserData.appUserId, appUserRole: appUserData.appUserRole },
             jwtPassword,
             { expiresIn: '1h'}
         )
